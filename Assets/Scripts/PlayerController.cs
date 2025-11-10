@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Transform legs;
     [SerializeField] LayerMask maskGround;
     Vector2 startPoint;
-    float radiusLegs = 0.04f;
+    float radiusLegs = 0.1f;
     bool isDead = false;
     bool isJump = false;
 
@@ -27,11 +27,15 @@ public class PlayerController : MonoBehaviour
  
     void GetDamage()
     {
+
+        isDead = true;
         transform.position = startPoint;
         GameManager.instance.RemoveLive();
         animator.SetBool("IsRun", false);
         animator.SetBool("IsJump", false);
         rb.linearVelocity = new Vector2(0, 0);
+
+        StartCoroutine(DeadPause());
     }
 
     void Update()
@@ -60,7 +64,7 @@ public class PlayerController : MonoBehaviour
                 rb.linearVelocity = Vector2.zero;
             }
 
-            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
             {
                 Jump(jumpDistance);
             }
@@ -71,13 +75,44 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-       OnGround(!Physics2D.OverlapCircle(legs.position,radiusLegs,maskGround));
+        OnGround(CheckGround());
+    }
+
+    private bool CheckGround()
+    {
+        float edgeOffset = 0.3f;
+
+        Vector2 leftEdge = legs.position + Vector3.left * edgeOffset;
+        Vector2 rightEdge = legs.position + Vector3.right * edgeOffset;
+
+        RaycastHit2D hitLeft = Physics2D.Raycast(leftEdge, Vector2.down, 0.5f, maskGround);
+        RaycastHit2D hitRight = Physics2D.Raycast(rightEdge, Vector2.down, 0.5f, maskGround);
+
+        bool isValidGroundLeft = hitLeft.collider != null && Vector2.Angle(hitLeft.normal, Vector2.up) < 46f;
+        bool isValidGroundRight = hitRight.collider != null && Vector2.Angle(hitRight.normal, Vector2.up) < 46f;
+
+        bool isOnGround = isValidGroundLeft || isValidGroundRight;
+        return isOnGround;
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (legs != null)
+        {
+            float edgeOffset = 0.3f;
+            Vector2 leftEdge = legs.position + Vector3.left * edgeOffset;
+            Vector2 rightEdge = legs.position + Vector3.right * edgeOffset;
+
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(leftEdge, leftEdge + Vector2.down * 0.5f);
+            Gizmos.DrawLine(rightEdge, rightEdge + Vector2.down * 0.5f);
+        }
     }
 
     void OnGround(bool onGround)
     {
-        isJump = onGround;
-        animator.SetBool("IsJump", onGround);   
+        isJump = !onGround;  
+        animator.SetBool("IsJump", !onGround);
     }
 
     void Jump(float distance)
@@ -106,7 +141,20 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator DeadPause()
     {
+        SpriteRenderer sp = GetComponent<SpriteRenderer>();
+        Color startColor = Color.white;
+        Color blinkColor = new Color(0.3f, 0.4f, 0.6f,0.3f);
 
+        for (int i = 0; i < 3; i++)
+        {
+            sp.color = blinkColor;
+            yield return new WaitForSeconds(0.2f);
+            sp.color = startColor;
+            yield return new WaitForSeconds(0.2f);
+        }
+
+        isDead = false;
+        GameManager.instance.HideInfoText();  
     }
 }
 
