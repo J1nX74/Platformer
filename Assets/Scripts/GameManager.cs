@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
         print(coins);
     }
 
-    public void OpenPortal()
+    public void FinishLevel()
     {
         if (currentLevel + 1 < SceneManager.sceneCountInBuildSettings)
         {

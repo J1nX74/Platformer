@@ -69,6 +69,10 @@ public class PlayerController : MonoBehaviour
                 Jump(jumpDistance);
             }
 
+            if (isInPortal && Input.GetKey(KeyCode.E))
+            {
+                GameManager.instance.FinishLevel();
+            }
             
         }
     }

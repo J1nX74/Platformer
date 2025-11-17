@@ -2492,6 +2492,7 @@ Transform:
   - {fileID: 860597193}
   - {fileID: 1932384}
   - {fileID: 254056332}
+  - {fileID: 803047226}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &254056330
@@ -2903,6 +2904,73 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b973dbc2442a2f429b1479fe1927ad1, type: 3}
+--- !u!1001 &803047225
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 213236451}
+    m_Modifications:
+    - target: {fileID: 2496622486480931961, guid: 46d6a09ca10305540805c833bc59dbfe, type: 3}
+      propertyPath: m_Name
+      value: Portal
+      objectReference: {fileID: 0}
+    - target: {fileID: 4509441995103868148, guid: 46d6a09ca10305540805c833bc59dbfe, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -8.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4509441995103868148, guid: 46d6a09ca10305540805c833bc59dbfe, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 13.41
+      objectReference: {fileID: 0}
+    - target: {fileID: 4509441995103868148, guid: 46d6a09ca10305540805c833bc59dbfe, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4509441995103868148, guid: 46d6a09ca10305540805c833bc59dbfe, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4509441995103868148, guid: 46d6a09ca10305540805c833bc59dbfe, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4509441995103868148, guid: 46d6a09ca10305540805c833bc59dbfe, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4509441995103868148, guid: 46d6a09ca10305540805c833bc59dbfe, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4509441995103868148, guid: 46d6a09ca10305540805c833bc59dbfe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4509441995103868148, guid: 46d6a09ca10305540805c833bc59dbfe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4509441995103868148, guid: 46d6a09ca10305540805c833bc59dbfe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 46d6a09ca10305540805c833bc59dbfe, type: 3}
+--- !u!4 &803047226 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4509441995103868148, guid: 46d6a09ca10305540805c833bc59dbfe, type: 3}
+  m_PrefabInstance: {fileID: 803047225}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &803047227 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4859481467226896011, guid: 46d6a09ca10305540805c833bc59dbfe, type: 3}
+  m_PrefabInstance: {fileID: 803047225}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &860597192
 GameObject:
   m_ObjectHideFlags: 0
@@ -3464,6 +3532,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8735587151155659247, guid: 64f52d5328949da46ab7b9a7a851b91d, type: 3}
+      propertyPath: portal
+      value: 
+      objectReference: {fileID: 803047227}
+    - target: {fileID: 8735587151155659247, guid: 64f52d5328949da46ab7b9a7a851b91d, type: 3}
       propertyPath: infoText
       value: 
       objectReference: {fileID: 1631757037}
@@ -3476,9 +3548,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 445823427}
     - target: {fileID: 8735587151155659247, guid: 64f52d5328949da46ab7b9a7a851b91d, type: 3}
+      propertyPath: infoPanel
+      value: 
+      objectReference: {fileID: 111604714}
+    - target: {fileID: 8735587151155659247, guid: 64f52d5328949da46ab7b9a7a851b91d, type: 3}
       propertyPath: livesText
       value: 
       objectReference: {fileID: 1337959745}
+    - target: {fileID: 8735587151155659247, guid: 64f52d5328949da46ab7b9a7a851b91d, type: 3}
+      propertyPath: panelText
+      value: 
+      objectReference: {fileID: 1631757037}
     - target: {fileID: 8735587151155659247, guid: 64f52d5328949da46ab7b9a7a851b91d, type: 3}
       propertyPath: nextLevelPanel
       value: 
