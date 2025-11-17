@@ -18,7 +18,7 @@ public class MaceScript : MonoBehaviour
     {
         if (Vector2.Distance(startPoint,gameObject.transform.position) < 0.2f)
         {
-            print("√де вы были 8 лет");
+            //print("√де вы были 8 лет");
             direction *= -1;
             rb.AddRelativeForce(Vector2.right * direction * speed, ForceMode2D.Impulse);
         }

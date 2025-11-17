@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements.Experimental;
+using System.Net.Http.Headers;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,13 +20,48 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Text coinsText;
     [SerializeField] private Text livesText;
     [SerializeField] private TextMeshProUGUI infoText;
-    [SerializeField] private GameObject nextLevelPanel;
-    [SerializeField] private TextMeshProUGUI nextText;
+    [SerializeField] private GameObject infoPanel;
+    [SerializeField] private TextMeshProUGUI panelText;
+    [SerializeField] private GameObject portal;
+
 
     public void AddGold()
     {
         coins++;
         coinsText.text = coins.ToString();
+
+        if (coins == coinsAmount)
+        {
+            portal.SetActive(true);        
+        }
+        print(coinsAmount);
+        print(coins);
+    }
+
+    public void OpenPortal()
+    {
+        if (currentLevel + 1 < SceneManager.sceneCountInBuildSettings)
+        {
+            infoPanel.SetActive(true);
+            Invoke(nameof(NextLevel), 3f);
+        }
+        else
+        {          
+            Invoke(nameof(LoadExit), 3f);
+        }
+    }
+
+    public void ShowTextInfo(string text)
+    {
+        panelText.text = text;
+        infoPanel.SetActive(true);
+    }
+
+
+    void NextLevel()
+    {
+        print("NextLvl");
+        SceneManager.LoadScene(currentLevel + 1);
     }
 
     public void RemoveLive()
@@ -32,16 +69,14 @@ public class GameManager : MonoBehaviour
         lives--;
         if (lives == 0)
         {
-            infoText.text = "Ты лох, тебе надо тренироваться";
-            infoText.gameObject.SetActive(true);
+            ShowTextInfo("Ты лох, тебе надо тренироваться");
             Invoke("LoadExit", 3f);
         }
         else
         {
             livesText.text = lives.ToString();
 
-            infoText.text = "Лох";
-            infoText.gameObject.SetActive(true);
+            ShowTextInfo("Последний лох ты");
         }
             
     }
@@ -72,6 +107,8 @@ public class GameManager : MonoBehaviour
 
         coinsAmount = listCoins.Count;
         listCoins.Clear();
+
+        portal.SetActive(false);
     }
 
 

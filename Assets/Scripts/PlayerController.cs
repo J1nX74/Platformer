@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     float radiusLegs = 0.1f;
     bool isDead = false;
     bool isJump = false;
+    bool isInPortal = false;
 
     void Start()
     {
@@ -24,7 +25,6 @@ public class PlayerController : MonoBehaviour
         startPoint = transform.position;
     }
 
- 
     void GetDamage()
     {
 
@@ -132,10 +132,24 @@ public class PlayerController : MonoBehaviour
             Destroy(collision.gameObject);
         }
 
-
         if (collision.CompareTag("Enemy"))
         {
             GetDamage();
+        }
+
+        if (collision.CompareTag("Portal"))
+        {
+            isInPortal = true;
+            GameManager.instance.ShowTextInfo("Нажмите \"E\", чтобы переместиться на следующий уровень");
+        } 
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Portal"))
+        {
+            isInPortal = false;
+            GameManager.instance.HideInfoText();
         }
     }
 
